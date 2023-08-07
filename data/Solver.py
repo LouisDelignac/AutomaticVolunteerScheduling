@@ -1,6 +1,3 @@
-# Author: Louis Delignac
-# Last modified: 02-08-2023
-
 from ortools.sat.python import cp_model
 
 class Solver:
@@ -55,7 +52,7 @@ class Solver:
         #     for d in self.all_days:
         #         self.model.Add(sum(max(self.shifts[(v, d, s, p)] for s in self.all_shifts) for p in self.all_divisions) <= self.max_tasks)
 
-    def AddBreaks(self):
+    def AddBreaks(self, max_continuous_work_period: int):
         # TODO
         pass
 

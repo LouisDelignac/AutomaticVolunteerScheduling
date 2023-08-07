@@ -1,9 +1,17 @@
+import configparser
 import csv
 from .Volunteer import Volunteer
 from .Division import Division
 
+# filename = 'ressources/sample.ini'
+def get_config(filename: str) -> configparser.ConfigParser:
+    """ Returns a ConfigParser object from a ini file """
+    config = configparser.ConfigParser()
+    config.read(filename)
+    return config
+
 # filename = 'data/volunteers.csv'
-def data_to_volunteers(filename):
+def data_to_volunteers(filename: str) -> list:
     """ Returns a list of Volunteer objects from a csv file """
     volunteers = []
     with open(filename, newline='', encoding='utf-8') as csvfile:
@@ -15,7 +23,7 @@ def data_to_volunteers(filename):
     return volunteers
 
 # filename = 'data/divisions.csv'
-def data_to_divisions(filename):
+def data_to_divisions(filename: str) -> list:
     """ Returns a list of Volunteer objects from a csv file """
     divisions = []
     with open(filename, newline='', encoding='utf-8') as csvfile:
