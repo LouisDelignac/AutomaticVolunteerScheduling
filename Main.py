@@ -8,17 +8,19 @@ divisions = data_to_divisions('ressources/divisions.csv')
 
 config = get_config('ressources/sample.ini')
 
-solver = Solver(len(volunteers), 0, 0, len(divisions))
+shifts = []
+for d in range(int(config.get('Days', 'days'))):
+    for s in config.get('Days', 'day' + str(d + 1)).split('_'):
+        shifts.append(s)
+print(shifts)
 
-if not config.getboolean('constraints', 'is_multitasking'):
-    solver.DisableMultitasking()
-if config.get('constraints', 'max_tasks') != '':
-    solver.LimitDifferentTasks(config.getint('constraints', 'max_tasks'))
-if config.get('constraints', 'break') != '':
-    solver.AddBreaks(config.getint('constraints', 'break'))
-if config.getboolean('constraints', 'is_distribute_tasks_evenly'):
-    solver.DistributeShiftsEvenly()
+solver = Solver(len(volunteers), len(shifts), len(divisions))
 
-
-
-print(divisions[0])
+# if not config.getboolean('constraints', 'is_multitasking'):
+#     solver.DisableMultitasking()
+# if config.get('constraints', 'max_tasks') != '':
+#     solver.LimitDifferentTasks(config.getint('constraints', 'max_tasks'))
+# if config.get('constraints', 'break') != '':
+#     solver.AddBreaks(config.getint('constraints', 'break'))
+# if config.getboolean('constraints', 'is_distribute_tasks_evenly'):
+#     solver.DistributeShiftsEvenly()
